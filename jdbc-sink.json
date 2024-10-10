@@ -1,0 +1,19 @@
+{
+    "name": "jdbc-sink",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "tasks.max": "1",
+        "topics": "outbox",
+        "connection.url": "jdbc:postgresql://postgres-inbox:5432/inventory?user=postgres&password=postgres",
+        "transforms": "unwrap",
+        "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+        "transforms.unwrap.drop.tombstones": "false",
+        "auto.create": "true",
+        "insert.mode": "upsert",
+        "delete.enabled": "true",
+        "pk.fields": "id",
+        "pk.mode": "record_key",
+        "table.name.format": "inbox"
+    }
+}
+
